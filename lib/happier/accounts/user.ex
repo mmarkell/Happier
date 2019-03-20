@@ -17,6 +17,7 @@ defmodule Happier.Accounts.User do
     struct
     |> cast(params, [:username, :email, :phone_number, :registered_date, :tier, :password_hash])
     |> validate_required([:username, :email])
+    |> validate_format(:email, ~r/@/)
     |> unique_constraint(:username)
     |> unique_constraint(:email)
   end
@@ -32,7 +33,7 @@ defmodule Happier.Accounts.User do
   defp put_password_hash(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
-        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(password))
+        put_change(changeset, :password_hash, Bcrypt.hash_pwd_salt(password))
 
       _ ->
         changeset

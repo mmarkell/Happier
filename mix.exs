@@ -39,7 +39,9 @@ defmodule Happier.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:comeonin, "~> 2.0"},
+      {:guardian, "~> 1.2"},
+      {:comeonin, "~> 5.0"},
+      {:bcrypt_elixir, "~> 2.0"},
       {:plug_cowboy, "~> 1.0"}
     ]
   end

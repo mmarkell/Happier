@@ -7,7 +7,7 @@ defmodule Happier.AccountsTest do
     alias Happier.Accounts.User
 
     @valid_attrs %{
-      email: "some email",
+      email: "someemail@gmail.com",
       password: "some password",
       phone_number: "some phone_number",
       registered_date: "2010-04-17 14:00:00.000000Z",
@@ -15,7 +15,7 @@ defmodule Happier.AccountsTest do
       username: "some username"
     }
     @update_attrs %{
-      email: "some updated email",
+      email: "someupdatedemail@gmail.com",
       password: "some updated password",
       phone_number: "some updated phone_number",
       registered_date: "2011-05-18 15:01:01.000000Z",
@@ -29,6 +29,14 @@ defmodule Happier.AccountsTest do
       registered_date: nil,
       tier: nil,
       username: nil
+    }
+
+    @bad_email_attrs %{
+      email: "johnjacobjingleheimerschmidt"
+    }
+
+    @short_email_attrs %{
+      email: ""
     }
 
     def user_fixture(attrs \\ %{}) do
@@ -64,7 +72,7 @@ defmodule Happier.AccountsTest do
 
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      assert user.email == "some email"
+      assert user.email == "someemail@gmail.com"
       assert user.password_hash != "some password"
       assert user.phone_number == "some phone_number"
 
@@ -79,11 +87,21 @@ defmodule Happier.AccountsTest do
       assert {:error, %Ecto.Changeset{}} = Accounts.create_user(@invalid_attrs)
     end
 
+    test "update_user/2 with invalid changeset email too short" do
+      user = user_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, @short_email_attrs)
+    end
+
+    test "update_user/2 with invalid changeset, not email" do
+      user = user_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, @bad_email_attrs)
+    end
+
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
       assert {:ok, user} = Accounts.update_user(user, @update_attrs)
       assert %User{} = user
-      assert user.email == "some updated email"
+      assert user.email == "someupdatedemail@gmail.com"
       assert user.phone_number == "some updated phone_number"
 
       assert user.registered_date ==

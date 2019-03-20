@@ -18,3 +18,4 @@ erl_crash.dump
 *.pot
 *.po
 mix.lock
+keys.env

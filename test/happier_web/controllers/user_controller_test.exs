@@ -5,7 +5,7 @@ defmodule HappierWeb.UserControllerTest do
   alias Happier.Accounts.User
 
   @create_attrs %{
-    email: "some email",
+    email: "someemail@gmail.com",
     password_hash: "some password_hash",
     phone_number: "some phone_number",
     registered_date: "2010-04-17 14:00:00.000000Z",
@@ -13,7 +13,7 @@ defmodule HappierWeb.UserControllerTest do
     username: "some username"
   }
   @update_attrs %{
-    email: "some updated email",
+    email: "someupdatedemail@gmail.com",
     password_hash: "some updated password_hash",
     phone_number: "some updated phone_number",
     registered_date: "2011-05-18 15:01:01.000000Z",
@@ -54,7 +54,7 @@ defmodule HappierWeb.UserControllerTest do
 
       assert json_response(conn, 200)["data"] == %{
                "id" => id,
-               "email" => "some email",
+               "email" => "someemail@gmail.com",
                "password_hash" => "some password_hash",
                "phone_number" => "some phone_number",
                "registered_date" => "2010-04-17T14:00:00.000000Z",
@@ -80,7 +80,7 @@ defmodule HappierWeb.UserControllerTest do
 
       assert json_response(conn, 200)["data"] == %{
                "id" => id,
-               "email" => "some updated email",
+               "email" => "someupdatedemail@gmail.com",
                "password_hash" => "some updated password_hash",
                "phone_number" => "some updated phone_number",
                "registered_date" => "2011-05-18T15:01:01.000000Z",

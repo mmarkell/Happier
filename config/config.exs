@@ -14,14 +14,18 @@ config :happier, HappierWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "0i9Mll/ao1KV9hzNLKt0vcihmhmcKrSpjV36NcE8tLhBGapt4951xav1uGDu0KxJ",
   render_errors: [view: HappierWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Happier.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Happier.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id]
 
+config :guardian, Guardian,
+  issuer: "Happier",
+  ttl: {30, :days},
+  verify_issuer: true
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

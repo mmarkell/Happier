@@ -13,6 +13,8 @@ config :happier, HappierWeb.Endpoint,
   check_origin: false,
   watchers: []
 
+config :guardian, Guardian, secret_key: System.get_env("GUARDIAN_SECRET_KEY")
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
