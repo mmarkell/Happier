@@ -3,17 +3,16 @@ defmodule Happier.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :username, :string
-      add :password_hash, :string
-      add :phone_number, :string
-      add :email, :string
-      add :tier, :integer
-      add :registered_date, :utc_datetime
+      add(:username, :string)
+      add(:password_hash, :string)
+      add(:phone_number, :string)
+      add(:email, :string, null: true)
+      add(:tier, :integer)
+      add(:registered_date, :utc_datetime)
 
       timestamps()
     end
 
-    create unique_index(:users, [:username])
-    create unique_index(:users, [:email])
+    create(unique_index(:users, [:username]))
   end
 end
