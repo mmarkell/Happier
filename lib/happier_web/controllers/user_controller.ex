@@ -6,38 +6,56 @@ defmodule HappierWeb.UserController do
 
   action_fallback(HappierWeb.FallbackController)
 
-  def index(conn, _params) do
-    users = Accounts.list_users()
-    render(conn, "index.json", users: users)
+  def action(conn, _) do
+    apply(__MODULE__, action_name(conn), [
+      conn,
+      conn.params,
+      Map.get(get_session(conn, :current_user), :id)
+    ])
   end
 
+  @spec create(any(), map()) :: any()
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", user_path(conn, :show, user))
       |> render("show.json", user: user)
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    user = Accounts.get_user!(id)
-    render(conn, "show.json", user: user)
-  end
+  def show(conn, %{"id" => id}, current_user_id) do
+    cond do
+      String.to_integer(id) == current_user_id ->
+        user = Accounts.get_user!(id)
+        render(conn, "show.json", user: user)
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Accounts.get_user!(id)
-
-    with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
-      render(conn, "show.json", user: user)
+      true ->
+        render(conn, "error.json", _params: nil)
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    user = Accounts.get_user!(id)
+  def update(conn, %{"id" => id, "user" => user_params}, current_user_id) do
+    cond do
+      String.to_integer(id) == current_user_id ->
+        with {:ok, %User{} = user} <-
+               Accounts.update_user(get_session(conn, :current_user), user_params) do
+          render(conn, "show.json", user: user)
+        end
 
-    with {:ok, %User{}} <- Accounts.delete_user(user) do
-      send_resp(conn, :no_content, "")
+      true ->
+        render(conn, "error.json", _params: nil)
+    end
+  end
+
+  def delete(conn, %{"id" => id}, current_user_id) do
+    cond do
+      String.to_integer(id) == current_user_id ->
+        with {:ok, %User{}} <- Accounts.delete_user(get_session(conn, :current_user)) do
+          send_resp(conn, :no_content, "")
+        end
+
+      true ->
+        render(conn, "error.json", _params: nil)
     end
   end
 end

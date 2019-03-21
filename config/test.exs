@@ -12,6 +12,8 @@ config :logger, level: :warn
 config :comeonin, :bcrypt_log_rounds, 4
 config :comeonin, :pbkdf2_rounds, 1
 
+config :happier, Happier.Accounts.Guardian, secret_key: System.get_env("GUARDIAN_SECRET_KEY")
+
 # Configure your database
 config :happier, Happier.Repo,
   adapter: Ecto.Adapters.Postgres,

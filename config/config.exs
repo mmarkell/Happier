@@ -21,7 +21,7 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id]
 
-config :guardian, Guardian,
+config :happier, Happier.Accounts.Guardian,
   issuer: "Happier",
   ttl: {30, :days},
   verify_issuer: true

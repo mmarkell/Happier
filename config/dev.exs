@@ -13,7 +13,7 @@ config :happier, HappierWeb.Endpoint,
   check_origin: false,
   watchers: []
 
-config :guardian, Guardian, secret_key: System.get_env("GUARDIAN_SECRET_KEY")
+config :happier, Happier.Accounts.Guardian, secret_key: System.get_env("GUARDIAN_SECRET_KEY")
 
 # ## SSL Support
 #
