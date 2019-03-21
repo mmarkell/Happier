@@ -21,5 +21,6 @@ defmodule HappierWeb.Router do
   scope "/api/v1", HappierWeb do
     pipe_through([:api, :user_authentication])
     resources("/users", UserController, except: [:new, :edit, :index])
+    resources("/selfevaluations", SelfEvaluationController, except: [:new, :edit])
   end
 end
