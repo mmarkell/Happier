@@ -101,4 +101,100 @@ defmodule Happier.Data do
   def change_self_evaluation(%SelfEvaluation{} = self_evaluation) do
     SelfEvaluation.changeset(self_evaluation, %{})
   end
+
+  alias Happier.Data.PassiveData
+
+  @doc """
+  Returns the list of passivedata.
+
+  ## Examples
+
+      iex> list_passivedata()
+      [%PassiveData{}, ...]
+
+  """
+  def list_passivedata do
+    Repo.all(PassiveData)
+  end
+
+  @doc """
+  Gets a single passive_data.
+
+  Raises `Ecto.NoResultsError` if the Passive data does not exist.
+
+  ## Examples
+
+      iex> get_passive_data!(123)
+      %PassiveData{}
+
+      iex> get_passive_data!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_passive_data!(id), do: Repo.get!(PassiveData, id)
+
+  @doc """
+  Creates a passive_data.
+
+  ## Examples
+
+      iex> create_passive_data(%{field: value})
+      {:ok, %PassiveData{}}
+
+      iex> create_passive_data(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_passive_data(attrs \\ %{}) do
+    %PassiveData{}
+    |> PassiveData.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a passive_data.
+
+  ## Examples
+
+      iex> update_passive_data(passive_data, %{field: new_value})
+      {:ok, %PassiveData{}}
+
+      iex> update_passive_data(passive_data, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_passive_data(%PassiveData{} = passive_data, attrs) do
+    passive_data
+    |> PassiveData.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a PassiveData.
+
+  ## Examples
+
+      iex> delete_passive_data(passive_data)
+      {:ok, %PassiveData{}}
+
+      iex> delete_passive_data(passive_data)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_passive_data(%PassiveData{} = passive_data) do
+    Repo.delete(passive_data)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking passive_data changes.
+
+  ## Examples
+
+      iex> change_passive_data(passive_data)
+      %Ecto.Changeset{source: %PassiveData{}}
+
+  """
+  def change_passive_data(%PassiveData{} = passive_data) do
+    PassiveData.changeset(passive_data, %{})
+  end
 end

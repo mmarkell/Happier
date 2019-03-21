@@ -22,5 +22,6 @@ defmodule HappierWeb.Router do
     pipe_through([:api, :user_authentication])
     resources("/users", UserController, except: [:new, :edit, :index])
     resources("/selfevaluations", SelfEvaluationController, except: [:new, :edit])
+    resources("/passivedata", PassiveDataController, except: [:new, :edit])
   end
 end

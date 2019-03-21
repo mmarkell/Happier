@@ -66,4 +66,68 @@ defmodule Happier.DataTest do
       assert %Ecto.Changeset{} = Data.change_self_evaluation(self_evaluation)
     end
   end
+
+  describe "passivedata" do
+    alias Happier.Data.PassiveData
+
+    @valid_attrs %{category: 42, date: "2010-04-17 14:00:00.000000Z", value: %{}}
+    @update_attrs %{category: 43, date: "2011-05-18 15:01:01.000000Z", value: %{}}
+    @invalid_attrs %{category: nil, date: nil, value: nil}
+
+    def passive_data_fixture(attrs \\ %{}) do
+      {:ok, passive_data} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Data.create_passive_data()
+
+      passive_data
+    end
+
+    test "list_passivedata/0 returns all passivedata" do
+      passive_data = passive_data_fixture()
+      assert Data.list_passivedata() == [passive_data]
+    end
+
+    test "get_passive_data!/1 returns the passive_data with given id" do
+      passive_data = passive_data_fixture()
+      assert Data.get_passive_data!(passive_data.id) == passive_data
+    end
+
+    test "create_passive_data/1 with valid data creates a passive_data" do
+      assert {:ok, %PassiveData{} = passive_data} = Data.create_passive_data(@valid_attrs)
+      assert passive_data.category == 42
+      assert passive_data.date == DateTime.from_naive!(~N[2010-04-17 14:00:00.000000Z], "Etc/UTC")
+      assert passive_data.value == %{}
+    end
+
+    test "create_passive_data/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Data.create_passive_data(@invalid_attrs)
+    end
+
+    test "update_passive_data/2 with valid data updates the passive_data" do
+      passive_data = passive_data_fixture()
+      assert {:ok, passive_data} = Data.update_passive_data(passive_data, @update_attrs)
+      assert %PassiveData{} = passive_data
+      assert passive_data.category == 43
+      assert passive_data.date == DateTime.from_naive!(~N[2011-05-18 15:01:01.000000Z], "Etc/UTC")
+      assert passive_data.value == %{}
+    end
+
+    test "update_passive_data/2 with invalid data returns error changeset" do
+      passive_data = passive_data_fixture()
+      assert {:error, %Ecto.Changeset{}} = Data.update_passive_data(passive_data, @invalid_attrs)
+      assert passive_data == Data.get_passive_data!(passive_data.id)
+    end
+
+    test "delete_passive_data/1 deletes the passive_data" do
+      passive_data = passive_data_fixture()
+      assert {:ok, %PassiveData{}} = Data.delete_passive_data(passive_data)
+      assert_raise Ecto.NoResultsError, fn -> Data.get_passive_data!(passive_data.id) end
+    end
+
+    test "change_passive_data/1 returns a passive_data changeset" do
+      passive_data = passive_data_fixture()
+      assert %Ecto.Changeset{} = Data.change_passive_data(passive_data)
+    end
+  end
 end
