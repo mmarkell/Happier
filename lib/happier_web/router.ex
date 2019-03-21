@@ -23,5 +23,6 @@ defmodule HappierWeb.Router do
     resources("/users", UserController, except: [:new, :edit, :index])
     resources("/selfevaluations", SelfEvaluationController, except: [:new, :edit])
     resources("/passivedata", PassiveDataController, except: [:new, :edit])
+    resources("/journaldata", JournalDataController, except: [:new, :edit])
   end
 end

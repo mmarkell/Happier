@@ -130,4 +130,68 @@ defmodule Happier.DataTest do
       assert %Ecto.Changeset{} = Data.change_passive_data(passive_data)
     end
   end
+
+  describe "journaldata" do
+    alias Happier.Data.JournalData
+
+    @valid_attrs %{analysis: %{}, date: "2010-04-17 14:00:00.000000Z", entry: "some entry"}
+    @update_attrs %{analysis: %{}, date: "2011-05-18 15:01:01.000000Z", entry: "some updated entry"}
+    @invalid_attrs %{analysis: nil, date: nil, entry: nil}
+
+    def journal_data_fixture(attrs \\ %{}) do
+      {:ok, journal_data} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Data.create_journal_data()
+
+      journal_data
+    end
+
+    test "list_journaldata/0 returns all journaldata" do
+      journal_data = journal_data_fixture()
+      assert Data.list_journaldata() == [journal_data]
+    end
+
+    test "get_journal_data!/1 returns the journal_data with given id" do
+      journal_data = journal_data_fixture()
+      assert Data.get_journal_data!(journal_data.id) == journal_data
+    end
+
+    test "create_journal_data/1 with valid data creates a journal_data" do
+      assert {:ok, %JournalData{} = journal_data} = Data.create_journal_data(@valid_attrs)
+      assert journal_data.analysis == %{}
+      assert journal_data.date == DateTime.from_naive!(~N[2010-04-17 14:00:00.000000Z], "Etc/UTC")
+      assert journal_data.entry == "some entry"
+    end
+
+    test "create_journal_data/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Data.create_journal_data(@invalid_attrs)
+    end
+
+    test "update_journal_data/2 with valid data updates the journal_data" do
+      journal_data = journal_data_fixture()
+      assert {:ok, journal_data} = Data.update_journal_data(journal_data, @update_attrs)
+      assert %JournalData{} = journal_data
+      assert journal_data.analysis == %{}
+      assert journal_data.date == DateTime.from_naive!(~N[2011-05-18 15:01:01.000000Z], "Etc/UTC")
+      assert journal_data.entry == "some updated entry"
+    end
+
+    test "update_journal_data/2 with invalid data returns error changeset" do
+      journal_data = journal_data_fixture()
+      assert {:error, %Ecto.Changeset{}} = Data.update_journal_data(journal_data, @invalid_attrs)
+      assert journal_data == Data.get_journal_data!(journal_data.id)
+    end
+
+    test "delete_journal_data/1 deletes the journal_data" do
+      journal_data = journal_data_fixture()
+      assert {:ok, %JournalData{}} = Data.delete_journal_data(journal_data)
+      assert_raise Ecto.NoResultsError, fn -> Data.get_journal_data!(journal_data.id) end
+    end
+
+    test "change_journal_data/1 returns a journal_data changeset" do
+      journal_data = journal_data_fixture()
+      assert %Ecto.Changeset{} = Data.change_journal_data(journal_data)
+    end
+  end
 end

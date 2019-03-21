@@ -197,4 +197,100 @@ defmodule Happier.Data do
   def change_passive_data(%PassiveData{} = passive_data) do
     PassiveData.changeset(passive_data, %{})
   end
+
+  alias Happier.Data.JournalData
+
+  @doc """
+  Returns the list of journaldata.
+
+  ## Examples
+
+      iex> list_journaldata()
+      [%JournalData{}, ...]
+
+  """
+  def list_journaldata do
+    Repo.all(JournalData)
+  end
+
+  @doc """
+  Gets a single journal_data.
+
+  Raises `Ecto.NoResultsError` if the Journal data does not exist.
+
+  ## Examples
+
+      iex> get_journal_data!(123)
+      %JournalData{}
+
+      iex> get_journal_data!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_journal_data!(id), do: Repo.get!(JournalData, id)
+
+  @doc """
+  Creates a journal_data.
+
+  ## Examples
+
+      iex> create_journal_data(%{field: value})
+      {:ok, %JournalData{}}
+
+      iex> create_journal_data(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_journal_data(attrs \\ %{}) do
+    %JournalData{}
+    |> JournalData.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a journal_data.
+
+  ## Examples
+
+      iex> update_journal_data(journal_data, %{field: new_value})
+      {:ok, %JournalData{}}
+
+      iex> update_journal_data(journal_data, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_journal_data(%JournalData{} = journal_data, attrs) do
+    journal_data
+    |> JournalData.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a JournalData.
+
+  ## Examples
+
+      iex> delete_journal_data(journal_data)
+      {:ok, %JournalData{}}
+
+      iex> delete_journal_data(journal_data)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_journal_data(%JournalData{} = journal_data) do
+    Repo.delete(journal_data)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking journal_data changes.
+
+  ## Examples
+
+      iex> change_journal_data(journal_data)
+      %Ecto.Changeset{source: %JournalData{}}
+
+  """
+  def change_journal_data(%JournalData{} = journal_data) do
+    JournalData.changeset(journal_data, %{})
+  end
 end
