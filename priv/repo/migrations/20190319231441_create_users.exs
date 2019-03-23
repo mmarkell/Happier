@@ -6,7 +6,7 @@ defmodule Happier.Repo.Migrations.CreateUsers do
       add(:username, :string)
       add(:password_hash, :string)
       add(:phone_number, :string)
-      add(:email, :string, null: true)
+      add(:email, :string)
       add(:tier, :integer)
       add(:date_created, :utc_datetime)
 

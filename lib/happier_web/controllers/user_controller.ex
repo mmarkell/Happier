@@ -14,15 +14,6 @@ defmodule HappierWeb.UserController do
     ])
   end
 
-  @spec create(any(), map()) :: any()
-  def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
-      conn
-      |> put_status(:created)
-      |> render("show.json", user: user)
-    end
-  end
-
   def show(conn, %{"id" => id}, current_user_id) do
     cond do
       String.to_integer(id) == current_user_id ->

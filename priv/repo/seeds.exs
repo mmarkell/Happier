@@ -10,7 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-Happier.Repo.insert!(%Happier.Accounts.User{
+Happier.Accounts.create_user(%{
   username: "ilovechicken444",
   email: "michaelmarkell1@gmail.com",
   password: "mypassword",

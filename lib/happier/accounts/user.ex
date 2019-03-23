@@ -8,15 +8,16 @@ defmodule Happier.Accounts.User do
     field(:phone_number, :string)
     field(:date_created, :utc_datetime)
     field(:tier, :integer)
-    field(:password, :string, virtual: true)
     field(:password_hash, :string)
+
+    field(:password, :string, virtual: true)
     timestamps()
   end
 
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:username, :email, :phone_number, :date_created, :tier, :password_hash])
-    |> validate_required([:username, :email])
+    |> validate_required([:username])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:username)
     |> unique_constraint(:email)

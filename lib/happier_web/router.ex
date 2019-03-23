@@ -13,14 +13,16 @@ defmodule HappierWeb.Router do
   # unauthenticated routes
   scope "/api/v1", HappierWeb do
     pipe_through([:api])
-    post("/login", SessionController, :login)
+    get("/login", SessionController, :login)
     post("/logout", SessionController, :logout)
+    get("/signup", SignUpController, :getdefault)
+    post("/signup", SignUpController, :create)
   end
 
   # authenticated routes
   scope "/api/v1", HappierWeb do
     pipe_through([:api, :user_authentication])
-    resources("/users", UserController, except: [:new, :edit, :index])
+    resources("/users", UserController, except: [:new, :edit, :index, :create])
     resources("/selfevaluations", SelfEvaluationController, except: [:new, :edit])
     resources("/passivedata", PassiveDataController, except: [:new, :edit])
     resources("/journaldata", JournalDataController, except: [:new, :edit])
