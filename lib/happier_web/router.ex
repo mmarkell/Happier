@@ -13,7 +13,7 @@ defmodule HappierWeb.Router do
   # unauthenticated routes
   scope "/api/v1", HappierWeb do
     pipe_through([:api])
-    get("/login", SessionController, :login)
+    post("/login", SessionController, :login)
     post("/logout", SessionController, :logout)
     get("/signup", SignUpController, :getdefault)
     post("/signup", SignUpController, :create)

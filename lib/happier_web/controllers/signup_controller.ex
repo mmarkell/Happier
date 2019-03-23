@@ -11,7 +11,7 @@ defmodule HappierWeb.SignUpController do
       {:error, reason} ->
         conn
         |> put_status(401)
-        |> json(%{message: reason})
+        |> json(%{message: to_string(reason)})
 
       {:ok, _user} ->
         conn
