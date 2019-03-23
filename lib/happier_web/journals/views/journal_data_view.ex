@@ -11,9 +11,11 @@ defmodule HappierWeb.JournalDataView do
   end
 
   def render("journal_data.json", %{journal_data: journal_data}) do
-    %{id: journal_data.id,
+    %{
+      id: journal_data.id,
       entry: journal_data.entry,
       analysis: journal_data.analysis,
-      date: journal_data.date}
+      date: journal_data.date
+    }
   end
 end

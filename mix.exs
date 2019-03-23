@@ -20,7 +20,7 @@ defmodule Happier.Mixfile do
   def application do
     [
       mod: {Happier.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :httpoison]
     ]
   end
 
@@ -42,7 +42,8 @@ defmodule Happier.Mixfile do
       {:guardian, "~> 1.2"},
       {:comeonin, "~> 5.0"},
       {:bcrypt_elixir, "~> 2.0"},
-      {:plug_cowboy, "~> 1.0"}
+      {:plug_cowboy, "~> 1.0"},
+      {:httpoison, "~> 1.4"}
     ]
   end
 

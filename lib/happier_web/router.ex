@@ -19,7 +19,7 @@ defmodule HappierWeb.Router do
     post("/signup", SignUpController, :create)
   end
 
-  # authenticated routes
+  # authenticated resource routes
   scope "/api/v1", HappierWeb do
     pipe_through([:api, :user_authentication])
     resources("/users", UserController, except: [:new, :edit, :index, :create])
@@ -27,5 +27,11 @@ defmodule HappierWeb.Router do
     resources("/passivedata", PassiveDataController, except: [:new, :edit])
     resources("/journaldata", JournalDataController, except: [:new, :edit])
     resources("/usersuggestions", UserSuggestionController, except: [:new, :edit])
+  end
+
+  # authenticated analysis routes
+  scope "/api/v1", HappierWeb do
+    pipe_through([:api, :user_authentication])
+    get("/journaldata/get_sentiment", JournalDataController, :get_sentiment)
   end
 end
