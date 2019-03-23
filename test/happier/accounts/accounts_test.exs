@@ -10,7 +10,7 @@ defmodule Happier.AccountsTest do
       email: "someemail@gmail.com",
       password: "some password",
       phone_number: "some phone_number",
-      registered_date: "2010-04-17 14:00:00.000000Z",
+      date_created: "2010-04-17 14:00:00.000000Z",
       tier: 42,
       username: "some username"
     }
@@ -18,7 +18,7 @@ defmodule Happier.AccountsTest do
       email: "someupdatedemail@gmail.com",
       password: "some updated password",
       phone_number: "some updated phone_number",
-      registered_date: "2011-05-18 15:01:01.000000Z",
+      date_created: "2011-05-18 15:01:01.000000Z",
       tier: 43,
       username: "some updated username"
     }
@@ -26,7 +26,7 @@ defmodule Happier.AccountsTest do
       email: nil,
       password: nil,
       phone_number: nil,
-      registered_date: nil,
+      date_created: nil,
       tier: nil,
       username: nil
     }
@@ -56,7 +56,7 @@ defmodule Happier.AccountsTest do
       assert user.phone_number == stored_user.phone_number
       assert user.tier == stored_user.tier
       assert user.username == stored_user.username
-      assert user.registered_date == stored_user.registered_date
+      assert user.date_created == stored_user.date_created
     end
 
     test "get_user!/1 returns the user with given id" do
@@ -67,7 +67,7 @@ defmodule Happier.AccountsTest do
       assert user.phone_number == stored_user.phone_number
       assert user.tier == stored_user.tier
       assert user.username == stored_user.username
-      assert user.registered_date == stored_user.registered_date
+      assert user.date_created == stored_user.date_created
     end
 
     test "create_user/1 with valid data creates a user" do
@@ -76,8 +76,7 @@ defmodule Happier.AccountsTest do
       assert user.password_hash != "some password"
       assert user.phone_number == "some phone_number"
 
-      assert user.registered_date ==
-               DateTime.from_naive!(~N[2010-04-17 14:00:00.000000Z], "Etc/UTC")
+      assert user.date_created == DateTime.from_naive!(~N[2010-04-17 14:00:00.000000Z], "Etc/UTC")
 
       assert user.tier == 42
       assert user.username == "some username"
@@ -104,8 +103,7 @@ defmodule Happier.AccountsTest do
       assert user.email == "someupdatedemail@gmail.com"
       assert user.phone_number == "some updated phone_number"
 
-      assert user.registered_date ==
-               DateTime.from_naive!(~N[2011-05-18 15:01:01.000000Z], "Etc/UTC")
+      assert user.date_created == DateTime.from_naive!(~N[2011-05-18 15:01:01.000000Z], "Etc/UTC")
 
       assert user.tier == 43
       assert user.username == "some updated username"
@@ -120,7 +118,7 @@ defmodule Happier.AccountsTest do
       assert user.phone_number == stored_user.phone_number
       assert user.tier == stored_user.tier
       assert user.username == stored_user.username
-      assert user.registered_date == stored_user.registered_date
+      assert user.date_created == stored_user.date_created
     end
 
     test "delete_user/1 deletes the user" do

@@ -10,11 +10,39 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-Happier.Accounts.create_user(%{
+Happier.Repo.insert!(%Happier.Accounts.User{
   username: "ilovechicken444",
   email: "michaelmarkell1@gmail.com",
   password: "mypassword",
   tier: 1,
   phone_number: "3022290419",
-  registered_date: DateTime.utc_now()
+  date_created: DateTime.utc_now()
+})
+
+Happier.Repo.insert!(%Happier.Data.JournalData{
+  user_id: 1,
+  entry: "",
+  analysis: %{},
+  date: DateTime.utc_now()
+})
+
+Happier.Repo.insert!(%Happier.Data.PassiveData{
+  user_id: 1,
+  category: 1,
+  value: %{},
+  date: DateTime.utc_now()
+})
+
+Happier.Repo.insert!(%Happier.Data.SelfEvaluation{
+  user_id: 1,
+  category: 1,
+  value: %{},
+  date: DateTime.utc_now()
+})
+
+Happier.Repo.insert!(%Happier.Insights.UserSuggestion{
+  user_id: 1,
+  category: 1,
+  suggestion: 1,
+  date_created: DateTime.utc_now()
 })

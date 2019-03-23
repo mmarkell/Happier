@@ -8,7 +8,7 @@ defmodule Happier.Repo.Migrations.CreateUsers do
       add(:phone_number, :string)
       add(:email, :string, null: true)
       add(:tier, :integer)
-      add(:registered_date, :utc_datetime)
+      add(:date_created, :utc_datetime)
 
       timestamps()
     end

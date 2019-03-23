@@ -6,7 +6,7 @@ defmodule Happier.Accounts.User do
     field(:username, :string)
     field(:email, :string)
     field(:phone_number, :string)
-    field(:registered_date, :utc_datetime)
+    field(:date_created, :utc_datetime)
     field(:tier, :integer)
     field(:password, :string, virtual: true)
     field(:password_hash, :string)
@@ -15,7 +15,7 @@ defmodule Happier.Accounts.User do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:username, :email, :phone_number, :registered_date, :tier, :password_hash])
+    |> cast(params, [:username, :email, :phone_number, :date_created, :tier, :password_hash])
     |> validate_required([:username, :email])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:username)

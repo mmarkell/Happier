@@ -18,7 +18,7 @@ defmodule HappierWeb.UserView do
       phone_number: user.phone_number,
       email: user.email,
       tier: user.tier,
-      registered_date: user.registered_date
+      date_created: user.date_created
     }
   end
 end
