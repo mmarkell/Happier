@@ -11,6 +11,7 @@
 # and so on) as they will fail if something goes wrong.
 
 Happier.Accounts.create_user(%{
+  id: 1,
   username: "ilovechicken444",
   email: "michaelmarkell1@gmail.com",
   password: "mypassword",
@@ -19,9 +20,10 @@ Happier.Accounts.create_user(%{
   date_created: DateTime.utc_now()
 })
 
-Happier.Repo.insert!(%Happier.Data.JournalData{
+Happier.Data.create_journal_data(%{
   user_id: 1,
-  entry: "",
+  entry:
+    "This is a journal entry. Brenda is totally a huge bitch and she makes me mad every time I see her.",
   analysis: %{},
   date: DateTime.utc_now()
 })

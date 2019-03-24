@@ -3,7 +3,6 @@ defmodule HappierWeb.JournalDataController do
 
   alias Happier.Data
   alias Happier.Data.JournalData
-  alias Happier.NLP_UTIL
   action_fallback(HappierWeb.FallbackController)
 
   def index(conn, _params) do
@@ -44,18 +43,17 @@ defmodule HappierWeb.JournalDataController do
 
   def get_sentiment(conn, %{"id" => id}) do
     journal_data = Data.get_journal_data!(id)
-    render(conn, "sentiment.json", journal_data: NLP_UTIL.get_sentiment(journal_data))
+    render(conn, "sentiment.json", journal_data: journal_data[:analysis][:sentiment])
   end
 
   def get_entities(conn, %{"id" => id}) do
     journal_data = Data.get_journal_data!(id)
-    render(conn, "entities.json", journal_data: NLP_UTIL.get_entities(journal_data))
+    render(conn, "entities.json", journal_data: journal_data[:analysis][:entities])
   end
 
   def get_entity_sentiment(conn, %{"id" => id}) do
     journal_data = Data.get_journal_data!(id)
-    render(conn, "entitiysentiment.json",
-      journal_data: NLP_UTIL.get_entities_sentiment(journal_data)
-    )
+
+    render(conn, "entitiysentiment.json", journal_data: journal_data[:analysis][:entity_sentiment])
   end
 end

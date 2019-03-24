@@ -16,7 +16,15 @@ defmodule Happier.Accounts.User do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:username, :email, :phone_number, :date_created, :tier, :password_hash])
+    |> cast(params, [
+      :username,
+      :email,
+      :phone_number,
+      :date_created,
+      :tier,
+      :password_hash,
+      :password
+    ])
     |> validate_required([:username, :password])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:username)

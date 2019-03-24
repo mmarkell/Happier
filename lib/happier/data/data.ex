@@ -243,7 +243,7 @@ defmodule Happier.Data do
   """
   def create_journal_data(attrs \\ %{}) do
     %JournalData{}
-    |> JournalData.changeset(attrs)
+    |> JournalData.registration_changeset(attrs)
     |> Repo.insert()
   end
 
