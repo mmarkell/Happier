@@ -22,7 +22,6 @@ defmodule Happier.NLP_UTIL do
 
   def get_sentiment(%{entry: journal_entry}) do
     url = add_auth(@analyze_sentiment)
-    IO.puts(url)
     body = form_request(journal_entry)
     response = make_request(url, body, make_header())
     process_sentiment_response(response)

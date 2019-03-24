@@ -19,15 +19,15 @@ defmodule HappierWeb.JournalDataView do
     }
   end
 
-  def render("sentiment.json", %{journal_data: sentiment}) do
-    sentiment
+  def render("sentiment.json", %{sentiment: sentiment}) do
+    Poison.encode!(sentiment)
   end
 
-  def render("entities.json", %{journal_data: entities}) do
-    entities
+  def render("entities.json", %{entities: entities}) do
+    Poison.encode!(entities)
   end
 
-  def render("entitiysentiment.json", %{journal_data: entity_sentiment}) do
-    entity_sentiment
+  def render("entitiysentiment.json", %{entitysentiment: entitysentiment}) do
+    Poison.encode!(entitysentiment)
   end
 end
