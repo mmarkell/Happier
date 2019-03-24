@@ -2,12 +2,11 @@ defmodule Happier.Data.JournalData do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "journaldata" do
-    field :analysis, :map
-    field :date, :utc_datetime
-    field :entry, :string
-    field :user_id, :id
+    field(:analysis, :map)
+    field(:date, :utc_datetime)
+    field(:entry, :string)
+    field(:user_id, :id)
 
     timestamps()
   end
@@ -15,7 +14,7 @@ defmodule Happier.Data.JournalData do
   @doc false
   def changeset(journal_data, attrs) do
     journal_data
-    |> cast(attrs, [:entry, :analysis, :date])
-    |> validate_required([:entry, :analysis, :date])
+    |> cast(attrs, [:entry, :analysis, :date, :user_id])
+    |> validate_required([:entry, :date])
   end
 end

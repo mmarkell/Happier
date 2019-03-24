@@ -44,6 +44,18 @@ defmodule HappierWeb.JournalDataController do
 
   def get_sentiment(conn, %{"id" => id}) do
     journal_data = Data.get_journal_data!(id)
-    render(conn, "show.json", journal_data: NLP_UTIL.get_sentiment(journal_data))
+    render(conn, "sentiment.json", journal_data: NLP_UTIL.get_sentiment(journal_data))
+  end
+
+  def get_entities(conn, %{"id" => id}) do
+    journal_data = Data.get_journal_data!(id)
+    render(conn, "entities.json", journal_data: NLP_UTIL.get_entities(journal_data))
+  end
+
+  def get_entity_sentiment(conn, %{"id" => id}) do
+    journal_data = Data.get_journal_data!(id)
+    render(conn, "entitiysentiment.json",
+      journal_data: NLP_UTIL.get_entities_sentiment(journal_data)
+    )
   end
 end

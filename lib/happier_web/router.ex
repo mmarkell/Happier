@@ -32,6 +32,8 @@ defmodule HappierWeb.Router do
   # authenticated analysis routes
   scope "/api/v1", HappierWeb do
     pipe_through([:api, :user_authentication])
-    get("/journaldata/get_sentiment", JournalDataController, :get_sentiment)
+    get("/journalsentiment/:id", JournalDataController, :get_sentiment)
+    get("/journalentities/:id", JournalDataController, :get_entities)
+    get("/journalentitysentiment/:id", JournalDataController, :get_entity_sentiment)
   end
 end

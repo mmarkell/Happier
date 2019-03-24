@@ -18,4 +18,16 @@ defmodule HappierWeb.JournalDataView do
       date: journal_data.date
     }
   end
+
+  def render("sentiment.json", %{journal_data: sentiment}) do
+    sentiment
+  end
+
+  def render("entities.json", %{journal_data: entities}) do
+    entities
+  end
+
+  def render("entitiysentiment.json", %{journal_data: entity_sentiment}) do
+    entity_sentiment
+  end
 end
